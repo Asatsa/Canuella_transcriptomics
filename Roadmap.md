@@ -39,15 +39,15 @@ The main objective is to define LC-PUFA biosynthesis in Canuella perplexa and th
 
 In this project we will make use of strategy "C" this is because we do not have a reference transcriptome.
 
-1. QC of the raw data (paired end sequence data from the illumina plattform)
+**1. QC of the raw data (paired end sequence data from the illumina plattform)**
 Tools
 - FastQC
-2. Trimming low quality reads and removing adapters if any
+**2. Trimming low quality reads and removing adapters if any**
 Tools:
 
 - Trimmomatic- can be used to discard low-quality reads, trimadaptor sequences, and eliminate poor-quality bases
 
-3. Read alignment
+**3. Read alignment**
 
 I will be performing both de novo assembly and also make use of a reference trancsriptome.
 
@@ -55,13 +55,13 @@ The GC content of mapped reads may reveal PCR biases. Tools for quality control 
 
 RNA-seq reads can be assembled de novo into a transcriptome using SOAPdenovo-Trans, Oases, Trans-ABySS or Trinity
 
-4. Transcript quantification
+**4. Transcript quantification**
 
 This will aim to estimate gene and transcript expression
 
-5. Differential gene expression analysis
+**5. Differential gene expression analysis**
 
-6. Visualization
+**6. Visualization**
 
 ### 3.Integration with other data types
 
