@@ -1,0 +1,27 @@
+if (! require(edgeR)) {
+   source("https://bioconductor.org/biocLite.R")
+   biocLite("edgeR")
+   library(edgeR)
+}
+
+data = read.table("/home/anabwire/data/aquality/Trinity.isoform.counts.matrix", header=T, row.names=1, com='')
+col_ordering = c(6,7,8,9,10,1,2,3,4,5)
+rnaseqMatrix = data[,col_ordering]
+rnaseqMatrix = round(rnaseqMatrix)
+rnaseqMatrix = rnaseqMatrix[rowSums(cpm(rnaseqMatrix) > 1) >= 2,]
+conditions = factor(c(rep("T20", 5), rep("T23", 5)))
+
+exp_study = DGEList(counts=rnaseqMatrix, group=conditions)
+exp_study = calcNormFactors(exp_study)
+exp_study = estimateDisp(exp_study)
+et = exactTest(exp_study, pair=c("T20", "T23"))
+tTags = topTags(et,n=NULL)
+result_table = tTags$table
+result_table = data.frame(sampleA="T20", sampleB="T23", result_table)
+result_table$logFC = -1 * result_table$logFC
+write.table(result_table, file='Trinity.isoform.counts.matrix.T20_vs_T23.edgeR.DE_results', sep='	', quote=F, row.names=T)
+write.table(rnaseqMatrix, file='Trinity.isoform.counts.matrix.T20_vs_T23.edgeR.count_matrix', sep='	', quote=F, row.names=T)
+source("/home/anabwire/miniconda3/envs/trinity/opt/trinity-2.8.5/Analysis/DifferentialExpression/R/rnaseq_plot_funcs.R")
+pdf("Trinity.isoform.counts.matrix.T20_vs_T23.edgeR.DE_results.MA_n_Volcano.pdf")
+plot_MA_and_Volcano(rownames(result_table), result_table$logCPM, result_table$logFC, result_table$FDR)
+dev.off()

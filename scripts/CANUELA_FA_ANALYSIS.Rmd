@@ -1,0 +1,322 @@
+---
+title: "CANUELA_FA_ANALYSIS"
+author: "Nabwire Asatsa"
+date: "2023-05-16"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## read in data
+
+
+```{r}
+data1 <- read.table("~/Documents/Thesis/masshunter/FA_RESULTS/FA_raw1.csv",row.names = 1, header = T, sep = ",")
+data1 <- t(data1)# transpose data
+data3 <- read.csv("~/Documents/Thesis/masshunter/FA_RESULTS/FA_raw.csv",row.names = 1, header = T, sep = ",")
+
+data4 <- read.csv("~/Documents/Thesis/masshunter/FA_RESULTS/FA_raw2.csv",row.names = 1, header = T, sep = ",")#area parameter have been added
+# change the column header
+
+#colnames(data1)[1]  <- "sample"
+#data1
+colnames(data3)
+##remove all the #VALUE! nad replace them with 0
+
+
+#remove X20.4.n.3) because its all zeros
+
+data1 <- subset(data1, select = -c(X20.4.n.3))
+data3 <- subset(data3, select = -c(X20.4.n.3))
+
+```
+
+## Test for normality The Shapiro–Wilk and Levene’s tests 
+
+The Shapiro–Wilk and Levene’s tests were utilised to verify normal distribution and homoscedasticity.Pvalue is not less than .05, we can assume the sample data comes from a population that is normally distributed.
+
+```{r}
+library("plyr")
+library('dplyr')
+shapiro.test(data3$X12.0)
+shapiro.test(x=data1$i.14.0)
+shapiro.test(x=data1$i.15.0)
+shapiro.test(x=data1$ai.15.0)
+shapiro.test(x=data1$X15.0)
+shapiro.test(x=data1$X16.0)
+shapiro.test(x=data1$X16.1.n.9)
+shapiro.test(x=data1$X16.1.n.7)
+shapiro.test(x=data1$X17.0)
+shapiro.test(x=data1$X16.2.n.6)
+shapiro.test(x=data1$X17.1.16.2.n.4)
+shapiro.test(x=data1$X16.3.n.6)
+shapiro.test(x=data1$X18.0)
+shapiro.test(x=data1$X16.3.n.4)
+shapiro.test(x=data1$X16.3.n.3)
+shapiro.test(x=data1$X18.1.n.9)
+shapiro.test(x=data1$X18.1.n.7)
+shapiro.test(x=data1$X16.4.n.3)
+shapiro.test(x=data1$X16.3.n.3)
+shapiro.test(x=data1$X18.1.n.9)
+shapiro.test(x=data1$X18.1.n.7)
+shapiro.test(x=data1$X16.4.n.3)
+shapiro.test(x=data1$X19.0)
+shapiro.test(x=data1$X18.2)
+shapiro.test(x=data1$X18.2.n.6)
+shapiro.test(x=data1$X18.3.n.6)
+shapiro.test(x=data1$X18.3.n.3)
+shapiro.test(x=data1$X18.4.n.3)
+shapiro.test(x=data1$X20.4.n.6)
+shapiro.test(x=data1$X20.5.n.3)
+shapiro.test(x=data1$X22.5.n.6)
+shapiro.test(x=data1$X22.6.n.3)
+
+data2 <- subset(data1, select = -c(19.0)) # for this analysis I removed the standard since its the same in all samples
+
+line5 <- do.call(rbind, lapply(data2, function(x) shapiro.test(x)[c("statistic", "p.value")]))
+write.csv(line,file="shapiroWilk_Result.csv",append=TRUE)
+
+## levens test
+library(car)
+leveneTest(y=data3$X12.0, group=data3$Temperature, data=data3)
+leveneTest(y=data3$i.14.0, group=data3$Temperature, data=data3)
+leveneTest(y=data3$X14.0, group=data3$Temperature, data=data3)
+leveneTest(y=data3$i.15.0, group=data3$Temperature, data=data3)
+leveneTest(y=data3$ai.15.0, group=data3$Temperature, data=data3)
+leveneTest(y=data3$X15.0, group=data3$Temperature, data=data3)
+leveneTest(y=data3$X16.0, group=data3$Temperature, data=data3)
+leveneTest(y=data3$X16.1.n.9, group=data3$Temperature, data=data3)
+leveneTest(y=data3$X16.1.n.7, group=data3$Temperature, data=data3)
+leveneTest(y=data3$X17.0, group=data3$Temperature, data=data3)
+leveneTest(y=data3$X16.2.n.6, group=data3$Temperature, data=data3)
+
+leveneTest(y=data3$X17.1.16.2.n.4, group=data3$Temperature, data=data3)
+leveneTest(y=data3$X16.3.n.6, group=data3$Temperature, data=data3)
+leveneTest(y=data3$X18.0, group=data3$Temperature, data=data3)
+leveneTest(y=data3$X16.3.n.4, group=data3$Temperature, data=data3)
+leveneTest(y=data3$X16.3.n.3, group=data3$Temperature, data=data3)
+leveneTest(y=data3$X18.1.n.9, group=data3$Temperature, data=data3)
+leveneTest(y=data3$X18.1.n.7, group=data3$Temperature, data=data3)
+leveneTest(y=data3$X16.4.n.3, group=data3$Temperature, data=data3)
+leveneTest(y=data3$X19.0, group=data3$Temperature, data=data3)
+leveneTest(y=data3$X18.2, group=data3$Temperature, data=data3)
+leveneTest(y=data3$X18.2.n.6, group=data3$Temperature, data=data3)
+
+leveneTest(y=data3$X18.3.n.6, group=data3$Temperature, data=data3)
+leveneTest(y=data3$X18.3.n.3, group=data3$Temperature, data=data3)
+leveneTest(y=data3$X18.4.n.3, group=data3$Temperature, data=data3)
+leveneTest(y=data3$X20.4.n.6, group=data3$Temperature, data=data3)
+leveneTest(y=data3$X22.5.n.6, group=data3$Temperature, data=data3)
+leveneTest(y=data3$X22.6.n.3, group=data3$Temperature, data=data3)
+leveneTest(y=data3$X20.5.n.3, group=data3$Temperature, data=data3)
+
+
+line1 <- sapply(copepods[c("X12.0","i.14.0","X14.0","i.15.0","ai.15.0","X15.0","X16.0","X16.1.n.9","X16.1.n.7","X17.0","X16.2.n.6","X17.1.16.2.n.4","X16.3.n.6","X18.0","X16.3.n.4","X16.3.n.3","X18.1.n.9","X18.1.n.7","X16.4.n.3","X19.0","X18.2","X18.2.n.6","X18.3.n.6","X18.3.n.3","X18.4.n.3","X20.4.n.6","X20.5.n.3","X22.5.n.6","X22.6.n.3")],function(x) leveneTest(x, group = copepods$Temperature)$'Pr(>F)'[1])
+write.csv(line,file="Levenestest_Result.csv",append=TRUE)
+colnames(data3)
+
+## 0.14 which is greater than our significance level of 0.05. So, we do have not enough evidence to reject the null hypothesis. So the variance across the samples is equal at 0.05 significance level
+```
+### subsetting filed samples and lab samples for comparison
+
+```{r}
+fieldsamples <- subset(data3, Temperature=="Field")
+labsamples <- subset(data3, Temperature == "20C" | Temperature == "23C" )
+labsamples1 <- t(labsamples) 
+  
+labsamples1 <- subset(labsamples,select = -c(Temperature))
+labsamples1 <- as.data.frame(labsamples1)
+copepods <- subset(data3, Temperature == "20C" | Temperature == "23C" | Temperature == "Field")
+copepods1 <- subset(data4, Temperature == "20C" | Temperature == "23C" | Temperature == "Field")
+algae <- subset(data3, Temperature == "algae")
+copepods2 <- subset(copepods1, select = -c())
+summary(algae)
+mean(algae)
+boxplot(algae$X12.0)
+
+line1 <- sapply(algae[c("X12.0","i.14.0","X14.0","i.15.0","ai.15.0","X15.0","X16.0","X16.1.n.9","X16.1.n.7","X17.0","X16.2.n.6","X17.1.16.2.n.4","X16.3.n.6","X18.0","X16.3.n.4","X16.3.n.3","X18.1.n.9","X18.1.n.7","X16.4.n.3","X19.0","X18.2","X18.2.n.6","X18.3.n.6","X18.3.n.3","X18.4.n.3","X20.4.n.6","X20.5.n.3","X22.5.n.6","X22.6.n.3")],function(x) sd(x))
+
+m<-tapply(X=labsamples$surv, INDEX=gluc$farmac:gluc$bact, FUN=mean)
+v<-tapply(X=gluc$survival, INDEX=gluc$farmac:gluc$bact, FUN=var)
+##newdata <- subset(mydata, age >= 20 | age < 10, 
+##select=c(ID, Weight))
+```
+# box plot
+```{r}
+library(lattice)
+library(tidyr)
+
+boxplot(x=data3$Temperature~data3$FAnames, data=data3)
+boxplot(as.data.frame(data3)
+
+#b_plot = data3.boxplot(column = ["X12.0","i.14.0","X14.0","i.15.0","ai.15.0","X15.0","X16.0","X16.1.n.9","X16.1.n.7","X17.0","X16.2.n.6","X17.1.16.2.n.4","X16.3.n.6","X18.0","X16.3.n.4","X16.3.n.3","X18.1.n.9","X18.1.n.7","X16.4.n.3","X19.0","X18.2","X18.2.n.6","X18.3.n.6","X18.3.n.3","X18.4.n.3","X20.4.n.6","X20.5.n.3","X22.5.n.6","X22.6.n.3"] ) 
+#b_plot.plot() 
+data3 %>%
+  pivot_longer(-Temperature) %>%
+  ggplot(aes(factor(Temperature), value)) +
+  geom_boxplot() +
+  facet_wrap(vars(name), nrow = 1)
+
+
+algae %>%
+  pivot_longer(-Temperature) %>%
+  ggplot(aes(factor(Temperature), value)) +
+  geom_boxplot() +
+  facet_wrap(vars(name), nrow = 1)
+
+```
+#### NA
+```{r}
+library(ggplot2)
+library(svglite)
+FAnames <- colnames(data3)
+FA_rel_subset <- list()
+for (i in 1:length(FAnames)){
+ FA_rel_subset[[i]] <- subset(data3, FAnames == FAnames[i])
+}
+
+#FAboxplot <- function(data3, name){
+#  bwplot(x=data3$Temperature~data3$X12.0, data=data3)
+#}
+```
+
+### Wilcoxon rank test
+```{r}
+library(dplyr)
+library(matrixTests)
+library('rstatix')
+res <- wilcox.test(copepods$X12.0 , data =data4,
+                   exact = FALSE)
+res
+
+line2 <- do.call(rbind, lapply(copepods1, function(x) wilcox.test(x)[c("statistic", "p.value")]))
+colnames(copepods1)
+line2 <- sapply(copepods1 [c("X12.0","i.14.0","X14.0","i.15.0","ai.15.0","X15.0","X16.0","X16.1.n.9","X16.1.n.7","X17.0","X16.2.n.6","X17.1.16.2.n.4","X16.3.n.6","X18.0","X16.3.n.4","X16.3.n.3","X18.1.n.9","X18.1.n.7","X16.4.n.3","X19.0","X18.02","X18.2.n.6","X18.3.n.6","X18.3.n.3","X18.4.n.3","X20.4.n.6","X20.5.n.3","X22.5.n.6","X22.6.n.3")],function(x)wilcox.test(x,group=copepods1$Area)$'Pr(>F)'[1])
+
+title <- c("X12.0","i.14.0","X14.0","i.15.0","ai.15.0","X15.0","X16.0","X16.1.n.9","X16.1.n.7","X17.0","X16.2.n.6","X17.1.16.2.n.4","X16.3.n.6","X18.0","X16.3.n.4","X16.3.n.3","X18.1.n.9","X18.1.n.7","X16.4.n.3","X19.0","X18.02","X18.2.n.6","X18.3.n.6","X18.3.n.3","X18.4.n.3","X20.4.n.6","X20.5.n.3","X22.5.n.6","X22.6.n.3")
+
+for(i in title) {       # for-loop over columns
+  wilcox.test(formula=copepods1,copepods1$Area, data=copepods1)
+}## I couldnt get this to work
+
+lin3 <- wilcox.test(formula=labsamples~Temperature,labsamples$X12.0, data=labsamples)
+lin4 <-wilcox.test(formula=copepods1$Area,copepods1$X12.0, data=copepods1)
+lin5 <-wilcox.test(formula=copepods1$Area,copepods1$i.14.0, data=copepods1)
+lin6 <-wilcox.test(formula=copepods1$Area,copepods1$X14.0, data=copepods1)
+lin10 <-wilcox.test(formula=copepods1$Area,copepods1$i.15.0, data=copepods1)
+lin11 <-wilcox.test(formula=copepods1$Area,copepods1$ai.15.0, data=copepods1)
+lin12 <-wilcox.test(formula=copepods1$Area,copepods1$X15.0, data=copepods1)
+lin13 <-wilcox.test(formula=copepods1$Area,copepods1$X16.0, data=copepods1)
+lin14 <-wilcox.test(formula=copepods1$Area,copepods1$X16.1.n.9, data=copepods1)
+lin15 <-wilcox.test(formula=copepods1$Area,copepods1$X16.1.n.7, data=copepods1)
+lin16 <-wilcox.test(formula=copepods1$Area,copepods1$X16.2.n.6, data=copepods1)
+lin17 <-wilcox.test(formula=copepods1$Area,copepods1$X16.3.n.6, data=copepods1)
+lin18 <-wilcox.test(formula=copepods1$Area,copepods1$X16.4.n.3, data=copepods1)
+lin19 <-wilcox.test(formula=copepods1$Area,copepods1$X16.3.n.4, data=copepods1)
+lin20 <-wilcox.test(formula=copepods1$Area,copepods1$X16.3.n.3, data=copepods1)
+lin21 <-wilcox.test(formula=copepods1$Area,copepods1$X18.0, data=copepods1)
+lin22 <-wilcox.test(formula=copepods1$Area,copepods1$X18.1.n.9, data=copepods1)
+lin23 <-wilcox.test(formula=copepods1$Area,copepods1$X18.2, data=copepods1)
+lin24 <-wilcox.test(formula=copepods1$Area,copepods1$X18.2.n.6, data=copepods1)
+lin25 <-wilcox.test(formula=copepods1$Area,copepods1$X18.3.n.6, data=copepods1)
+lin26 <-wilcox.test(formula=copepods1$Area,copepods1$X18.3.n.3, data=copepods1)
+lin27 <-wilcox.test(formula=copepods1$Area,copepods1$X18.4.n.3, data=copepods1)
+lin28 <-wilcox.test(formula=copepods1$Area,copepods1$X19.0, data=copepods1)
+lin29 <-wilcox.test(formula=copepods1$Area,copepods1$X20.4.n.6, data=copepods1)
+lin30 <-wilcox.test(formula=copepods1$Area,copepods1$X20.5.n.3, data=copepods1)
+lin31 <-wilcox.test(formula=copepods1$Area,copepods1$X22.5.n.6, data=copepods1)
+lin32 <-wilcox.test(formula=copepods1$Area,copepods1$X22.6.n.3, data=copepods1)
+lin33 <-wilcox.test(formula=copepods1$Area,copepods1$X17.0, data=copepods1)
+lin34 <-wilcox.test(formula=copepods1$Area,copepods1$X17.1.16.2.n.4, data=copepods1)
+lin35 <- wilcox.test(formula=copepods1$Area,copepods1$X18.1.n.7, data=copepods1)
+wt <- c(lin11,lin10,lin12,lin13,lin14,lin34,lin33,lin31,lin30,lin29,lin28,lin27,lin26,lin25,lin24,lin23,lin22,lin21,lin20,lin19,lin18,lin17,lin16,lin5,lin4,lin6)
+write.csv(wt,file="labvsfield.tsv")
+
+lin3 <- wilcox.test(formula=labsamples~Temperature,labsamples$X12.0, data=labsamples)
+lin4 <-wilcox.test(formula=labsample$Temperature$X12.0, data=labsamples)
+lin5 <-wilcox.test(formula=labsamples$Temperature$i.14.0, data=labsamples)
+lin6 <-wilcox.test(formula=labsamples$Temperature$X14.0, data=labsamples)
+lin10 <-wilcox.test(formula=labsamples$Temperature$i.15.0, data=labsamples)
+lin11 <-wilcox.test(formula=labsamples$Temperature$ai.15.0, data=labsamples)
+lin12 <-wilcox.test(formula=labsamples$Temperature$X15.0, data=labsamples)
+lin13 <-wilcox.test(formula=labsamples$Temperature$X16.0, data=labsamples)
+lin14 <-wilcox.test(formula=labsamples$Temperature$X16.1.n.9, data=labsamples)
+lin15 <-wilcox.test(formula=labsamples$Temperature$X16.1.n.7, data=labsamples)
+lin16 <-wilcox.test(formula=labsamples$Temperature$X16.2.n.6, data=labsamples)
+lin17 <-wilcox.test(formula=labsamples$Temperature$X16.3.n.6, data=labsamples)
+lin18 <-wilcox.test(formula=labsamples$Temperature$X16.4.n.3, data=labsamples)
+lin19 <-wilcox.test(formula=labsamples$Temperature$X16.3.n.4, data=labsamples)
+lin20 <-wilcox.test(formula=labsamples$Temperature$X16.3.n.3, data=labsamples)
+lin21 <-wilcox.test(formula=labsamples$Temperature$X18.0, data=labsamples)
+lin22 <-wilcox.test(formula=labsamples$Temperature$X18.1.n.9, data=labsamples)
+lin23 <-wilcox.test(formula=labsamples$Temperature$X18.2, data=labsamples)
+lin24 <-wilcox.test(formula=labsamples$Temperature$X18.2.n.6, data=labsamples)
+lin25 <-wilcox.test(formula=labsamples$Temperature$X18.3.n.6, data=labsamples)
+lin26 <-wilcox.test(formula=labsamples$Temperature1$X18.3.n.3, data=labsamples)
+lin27 <-wilcox.test(formula=labsamples$Temperature$X18.4.n.3, data=labsamples)
+lin28 <-wilcox.test(formula=labsamples$Temperature$X19.0, data=labsamples)
+lin29 <-wilcox.test(formula=labsamples$Temperature$X20.4.n.6, data=labsamples)
+lin30 <-wilcox.test(formula=labsamples$Temperature$X20.5.n.3, data=labsamples)
+lin31 <-wilcox.test(formula=labsamples$Temperature$X22.5.n.6, data=labsamples)
+lin32 <-wilcox.test(formula=labsamples$Temperature$X22.6.n.3, data=labsamples)
+lin33 <-wilcox.test(formula=labsamples$Temperature$X17.0, data=labsamples)
+lin34 <-wilcox.test(formula=labsamples$Temperature$X17.1.16.2.n.4, data=labsamples)
+lin35 <- wilcox.test(formula=labsamples$Temperature$X18.1.n.7, data=labsamples)
+wt1 <- c(lin11,lin10,lin12,lin13,lin14,lin34,lin33,lin31,lin30,lin29,lin28,lin27,lin26,lin25,lin24,lin23,lin22,lin21,lin20,lin19,lin18,lin17,lin16,lin5,lin4,lin6)
+wt
+```
+
+### nMDS
+```{r}
+#read in the relative abundancce data
+data5 <- read.csv("~/Documents/Thesis/masshunter/FA_RESULTS/FA_relative.csv",row.names = 1, header = T, sep = ",")
+copepods5 <- subset(data5, Temperature == "20C" | Temperature == "23C")
+library(vegan)
+#make community matrix - extract columns with abundance information
+#com = copepods5[,4:ncol(copepods5)]
+com <- subset(copepods5, select = -c(Temperature))
+Temp <- subset(copepods5, select = c(Temperature))
+#turn abundance data frame into a matrix
+m_com = as.matrix(com)
+#run nMDS
+set.seed(123)
+nmds = metaMDS(m_com, distance = "bray")
+nmds
+# plot using ggplot
+library(ggplot2)
+#extract NMDS scores (x and y coordinates)
+ddata.scores = as.data.frame(scores(nmds)$sites)
+#add columns to data frame from original data
+ddata.scores$Temperature = copepods5$Temperature
+xx = ggplot(ddata.scores, aes(x = NMDS1, y = NMDS2)) + 
+    geom_point(size = 4, aes( shape = Temperature, colour = Temperature))+ 
+    theme(axis.text.y = element_text(colour = "black", size = 7, face = "bold"), 
+    axis.text.x = element_text(colour = "black", face = "bold", size = 7), 
+    legend.text = element_text(size = 7, face ="bold", colour ="black"), 
+    legend.position="none",
+      #"right", axis.title.y = element_text(face = "bold", size = 10), 
+    axis.title.x = element_text(face = "bold", size = 10, colour = "black"), 
+    #legend.title = element_text(size = 14, colour = "black", face = "bold"), 
+    panel.background = element_blank(), panel.border = element_rect(colour = "black", fill = NA, size = 1.2),
+    legend.key=element_blank()) + 
+    labs(x = "NMDS1", colour = "Temperature", y = "NMDS2", shape = "Temperature")  + 
+    scale_colour_manual(values = c("#009E73", "#E69F00")) 
+png("FANMDSA.png") 
+xx
+dev.off()
+ggsave("NMDS.svg")
+```
+### PERMANOVA
+
+```{r}
+s.permova <- adonis2(com~copepods5$Temperature, method = "euclidean", data= com)
+s.permova
+## on transformed data
+com1 <- sqrt(com)
+s.permova1 <- adonis2(com1~copepods5$Temperature, method = "euclidean", data= com1)
+s.permova1
+
+#T.test
+t.test(labsamples$X22.6.n.3 ~ labsamples$Temperature, data = labsamples)

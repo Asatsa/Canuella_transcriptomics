@@ -1,0 +1,145 @@
+# hmmsearch :: search profile(s) against a sequence database
+# HMMER 3.1b2 (February 2015); http://hmmer.org/
+# Copyright (C) 2015 Howard Hughes Medical Institute.
+# Freely distributed under the GNU General Public License (GPLv3).
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# query HMM file:                  /home/anabwire/data/aquality/busco_downloads/lineages/arthropoda_odb10/hmms/9647at6656.hmm
+# target sequence database:        /home/anabwire/data/aquality/busco_arthropoda/run_arthropoda_odb10/metaeuk_output/rerun_results/Trinity.fasta.modified.fas
+# per-dom hits tabular output:     /home/anabwire/data/aquality/busco_arthropoda/run_arthropoda_odb10/hmmer_output/rerun_results/9647at6656.out
+# number of worker threads:        1
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Query:       9647at6656  [M=1237]
+Scores for complete sequences (score includes all domains):
+   --- full sequence ---   --- best 1 domain ---    -#dom-
+    E-value  score  bias    E-value  score  bias    exp  N  Sequence                         Description
+    ------- ------ -----    ------- ------ -----   ---- --  --------                         -----------
+    5.9e-71  234.7   4.4    8.8e-38  124.8   0.1    2.6  2  TRINITY_DN53404_c0_g2_i2:11-1021  
+    1.9e-41  137.0   7.0    3.3e-19   63.3   0.0    4.6  4  TRINITY_DN6504_c0_g2_i1:1-2505    
+      7e-15   49.0   2.8      1e-14   48.4   2.8    1.3  1  TRINITY_DN53404_c0_g1_i2:146-355  
+    6.3e-12   39.2   0.7    6.7e-12   39.1   0.7    1.0  1  TRINITY_DN53404_c0_g1_i1:223-354  
+
+
+Domain annotation for each sequence (and alignments):
+>> TRINITY_DN53404_c0_g2_i2:11-1021  
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !  110.1   0.9   1.6e-35   2.4e-33     254     379 ..       1     159 [.       1     168 [. 0.87
+   2 !  124.8   0.1   5.9e-40   8.8e-38     375     514 ..     174     337 .]     171     337 .] 0.85
+
+  Alignments for each domain:
+  == domain 1  score: 110.1 bits;  conditional E-value: 1.6e-35
+                        9647at6656 254 DvevlsqlvklrlKtkplinlylaclkelvtv........lkhtiynel.narnpnnm.llavlfqaspek..alla 318
+                                       D+ev+ +++klr+K+kp+in yl++l+el+          lk+ti+nel narn+nnm +l+v+fq++pe+  a la
+  TRINITY_DN53404_c0_g2_i2:11-1021   1 DIEVIGNFTKLRFKNKPTINWYLQALRELCLAhrdnlpssLKYTIFNELsNARNTNNMsMLTVMFQTEPERasASLA 77 
+                                       89**************************9964333334449*******9789*****989*********972257** PP
+
+                        9647at6656 319 eifqelllnre....alrallreivrvlrhdlnllvfv.................elkeriflsiaDliclcillav 374
+                                        +f elll++e    alrallreivr+lr+d+nl++f+                 e+ker+f+si+Dli+l+i+l++
+  TRINITY_DN53404_c0_g2_i2:11-1021  78 AVFIELLLQKEcylrALRALLREIVRALRYDINLHAFCghlmtdrpkpeaafrdfEFKERMFTSITDLITLAIFLGI 154
+                                       **********9655569********************97777777777777776679******************** PP
+
+                        9647at6656 375 spqvk 379
+                                       sp+v+
+  TRINITY_DN53404_c0_g2_i2:11-1021 155 SPSVR 159
+                                       **985 PP
+
+  == domain 2  score: 124.8 bits;  conditional E-value: 5.9e-40
+                        9647at6656 375 spqvkfqkqvskiqkeavlWllev.pklyk....eflkalhkilll...eeqyskdnwppeserl.llrlvsevPll 442
+                                       +p +++ k+++ iq++av+W++ev pk+yk     +   lhk+l++   +e +  d wp+e++r+ +++ +se+Pll
+  TRINITY_DN53404_c0_g2_i2:11-1021 174 TPYKNYLKTIALIQRDAVWWFYEVvPKIYKpeptAYPPNLHKVLFMvplDEYCHTDGWPAEADRVlFFKATSEIPLL 250
+                                       57899****************996378997444468899******7554788889*********6268********* PP
+
+                        9647at6656 443 eetllrilliglskeiplsaaealelveqlikRaav..............dk.leiidllfnlcaYhhpenielPsg 504
+                                       ++tllri+lig++k+ pl+ +++++lv+ +ikRaa+              dk  e +++lf+l+aY++ eni+lP++
+  TRINITY_DN53404_c0_g2_i2:11-1021 251 QDTLLRIFLIGMNKNLPLNGRDTIDLVDCIIKRAAAlhhlesedfpileaDKaSEFFEFLFQLAAYNYHENISLPND 327
+                                       **********************************96444444333333334446899******************** PP
+
+                        9647at6656 505 YepPkLAiss 514
+                                       Y+pP++Ais+
+  TRINITY_DN53404_c0_g2_i2:11-1021 328 YTPPRMAISN 337
+                                       ********96 PP
+
+>> TRINITY_DN6504_c0_g2_i1:1-2505  
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 ?   -1.3   0.1     0.073        11     930     949 ..       1      20 [.       1      24 [. 0.88
+   2 !   63.3   0.0   2.2e-21   3.3e-19     945    1055 ..     271     417 ..     267     444 .. 0.75
+   3 !   45.0   1.6   7.3e-16   1.1e-13    1058    1158 ..     490     633 ..     468     664 .. 0.75
+   4 !   26.4   0.0   3.1e-10   4.7e-08    1172    1236 ..     740     815 ..     693     816 .. 0.67
+
+  Alignments for each domain:
+  == domain 1  score: -1.3 bits;  conditional E-value: 0.073
+                      9647at6656 930 hkRGatgGevfvkvlelgll 949
+                                     h+RGa+gGe+f+++l l + 
+  TRINITY_DN6504_c0_g2_i1:1-2505   1 HQRGANGGEHFAEALGLNIH 20 
+                                     79*************98765 PP
+
+  == domain 2  score: 63.3 bits;  conditional E-value: 2.2e-21
+                      9647at6656  945 elgllvDwlaelepel......iqlkllfsk............rpylltllthraswetl..............ydp 989 
+                                      ++gllvDwl+ l+pe+      iq++llfsk            rpyllt+lth+asw++l              +dp
+  TRINITY_DN6504_c0_g2_i1:1-2505  271 KVGLLVDWLEMLDPEIvqacpdIQQQLLFSKkigpnkgktsncRPYLLTMLTHQASWKSLrrtidvvmgtfnpeMDP 347 
+                                      679*************3333333579***9866666666666679*************9866666666666666689 PP
+
+                      9647at6656  990 tavLdflealtknpklwqGrdkavpkh......lllsekqlkvlveYileEasrlklllkciklllqlYlki 1055
+                                      +avLdfl a++ +p+lw+Grdk+vpkh      l+l+  ql vl++Y l+E +      ++ + +  +   +
+  TRINITY_DN6504_c0_g2_i1:1-2505  348 SAVLDFLCACVYIPRLWHGRDKHVPKHetqqdvLSLTGPQLYVLMDYCLQEHAETGA--ETASRMPLILRCL 417 
+                                      **************************9888888999**************9754332..2222233333334 PP
+
+  == domain 3  score: 45.0 bits;  conditional E-value: 7.3e-16
+                      9647at6656 1058 vsalDkvshtlltalaat.........sqelelllrklaathpllvlRqlpllasllkgraqld............. 1112
+                                       s+lD +shtlltal+at         +qe+e+ +rk+a+ hp l+lR+lpl+as+lkgr+q++             
+  TRINITY_DN6504_c0_g2_i1:1-2505  490 TSTLDALSHTLLTALSATqhgrqwgiqMQEFEASTRKVASCHPHLMLRNLPLIASSLKGRTQYEfsffrsrnhmtly 566 
+                                      689************987444444444689******************************98763333333333333 PP
+
+                      9647at6656 1113 .....llellqpkifk.........ilesylellknh.......gsllsrfvellqayisadpkeae 1158
+                                           ++ellqp+ifk         +l++y+e++ ++         l+++f+ +l++y+ ++p++a 
+  TRINITY_DN6504_c0_g2_i1:1-2505  567 tillgVMELLQPHIFKpehksalqdALKCYFEMIAAYfnrrdsiRGLIDKFILFLHEYMDHQPSDAV 633 
+                                      33333689*******6444444444799****99877222222245899************999875 PP
+
+  == domain 4  score: 26.4 bits;  conditional E-value: 3.1e-10
+                      9647at6656 1172 kpssirsla.slllrllka........lsallqclesenadvvesaldklpelvvllqek..allqkvfelgvksn 1236
+                                       ++++r++a ++ll++l++        ++a+++cles ++ vv+saldklp+++vl+qe+   +lq++f lg++sn
+  TRINITY_DN6504_c0_g2_i1:1-2505  740 PHRQVRHHAyTVLLKFLRHspkssqliVPAFIECLESADNAVVQSALDKLPDIAVLAQESlsRILQTAFGLGLYSN 815 
+                                      4456666652345566655333333336799****************************7336**********997 PP
+
+>> TRINITY_DN53404_c0_g1_i2:146-355  
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !   48.4   2.8     7e-17     1e-14     551     603 ..       1      70 []       1      70 [] 0.86
+
+  Alignments for each domain:
+  == domain 1  score: 48.4 bits;  conditional E-value: 7e-17
+                        9647at6656 551 mciTnqfsfpppt............kelqlaalekqeilefEshLAaa.....itEqnslLlsqlitldp 603
+                                       mciTnqf+fpppt            kelq+++lekq+il+fE+hLAaa     itE+ns+Ll+qlit+dp
+  TRINITY_DN53404_c0_g1_i2:146-355   1 MCITNQFVFPPPTiatgeqaedmkaKELQTQTLEKQAILDFEMHLAAAtnktvITESNSFLLAQLITMDP 70 
+                                       9*********98655555555555589*******************98777779***************8 PP
+
+>> TRINITY_DN53404_c0_g1_i1:223-354  
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !   39.1   0.7   4.5e-14   6.7e-12     565     603 ..       1      44 []       1      44 [] 0.94
+
+  Alignments for each domain:
+  == domain 1  score: 39.1 bits;  conditional E-value: 4.5e-14
+                        9647at6656 565 elqlaalekqeilefEshLAaa.....itEqnslLlsqlitldp 603
+                                       elq+++lekq+il+fE+hLAaa     itE+ns+Ll+qlit+dp
+  TRINITY_DN53404_c0_g1_i1:223-354   1 ELQTQTLEKQAILDFEMHLAAAtnktvITESNSFLLAQLITMDP 44 
+                                       79******************98777779***************8 PP
+
+
+
+Internal pipeline statistics summary:
+-------------------------------------
+Query model(s):                              1  (1237 nodes)
+Target sequences:                          596  (142315 residues searched)
+Passed MSV filter:                        11  (0.0184564); expected 11.9 (0.02)
+Passed bias filter:                        5  (0.00838926); expected 11.9 (0.02)
+Passed Vit filter:                         4  (0.00671141); expected 0.6 (0.001)
+Passed Fwd filter:                         4  (0.00671141); expected 0.0 (1e-05)
+Initial search space (Z):                596  [actual number of targets]
+Domain search space  (domZ):               4  [number of targets reported over threshold]
+# CPU time: 0.05u 0.01s 00:00:00.06 Elapsed: 00:00:00.06
+# Mc/sec: 2934.06
+//
+[ok]
